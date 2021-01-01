@@ -1,0 +1,85 @@
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+switch: !include switch.yaml
+
+fan:
+  - platform: xiaomi_miio
+    name: Xiaomi Air Purifier
+    host: 192.168.50.31
+    token: f0fcb59c3c1a3352d9e570be209e844f
+  - platform: xiaomi_miio
+    name: XiaomiAirPurifier2S
+    host: 192.168.50.17
+    token: d459205f20835ef67b73e85bc71fa9ad
+    model: zhimi.airpurifier.sa2 
+
+sensor:
+  - platform: template
+    sensors:
+      living_room_temp:
+        friendly_name: 客廳溫度
+        value_template: '{{ states.fan.XiaomiAirPurifier2S.attributes.temperature }}'
+        unit_of_measurement: "°C" 
+      living_room_aqi: 
+        friendly_name: "客廳空氣質素" 
+        unit_of_measurement: 'μg / m³' 
+        value_template: "{{state_attr ('fan.XiaomiAirPurifier2S', 'aqi')}}"
+      living_room_humidity: 
+        friendly_name: "Humidity" 
+        unit_of_measurement: '%' 
+        value_template: "{{state_attr ('fan.XiaomiAirPurifier2S', 'humidity')}}"
+      bedroom_aqi: 
+        friendly_name: "睡房空氣質素" 
+        unit_of_measurement: 'μg / m³' 
+        value_template: "{{state_attr ('fan.xiaomi_air_purifier', 'aqi')}}"
+      
+    
+remote:
+  - platform: broadlink
+    host: 192.168.50.103
+    mac: 78:0F:77:B9:45:76
+    name: RM Pro
+    
+
+browser_mod:
+  prefix: "browsermod_"
+
+yeelight:
+  devices:
+    192.168.50.192:
+      name: Light Strip
+      model: strip1
+
+homekit:
+  filter:
+    exclude_domains:
+      - automation
+      - input_boolean
+    exclude_entity_globs:
+      - light.browsermod_*
+      - media_player.browsermod_*
+      - sensor.browsermod_* 
+      
+frontend:
+  themes: !include_dir_merge_named themes
+  
+
+
+
+
+
+
+
+
+        
+        

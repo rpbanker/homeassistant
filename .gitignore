@@ -1,0 +1,7 @@
+secrets.yaml
+.cloud
+.storage
+home-assistant_v2.db
+home-assistant.log
+tts
+known_devices.yaml

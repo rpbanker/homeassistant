@@ -15,12 +15,12 @@ switch: !include switch.yaml
 fan:
   - platform: xiaomi_miio
     name: Xiaomi Air Purifier
-    host: 192.168.50.31
-    token: f0fcb59c3c1a3352d9e570be209e844f
+    host: 192.168.1.104
+    token: !secret  Xiaomi_Air_Purifier_token
   - platform: xiaomi_miio
     name: XiaomiAirPurifier2S
-    host: 192.168.50.17
-    token: d459205f20835ef67b73e85bc71fa9ad
+    host: 192.168.1.103
+    token: !secret  Xiaomi_Air_Purifier_2S_token
     model: zhimi.airpurifier.sa2 
 
 sensor:
@@ -46,8 +46,8 @@ sensor:
     
 remote:
   - platform: broadlink
-    host: 192.168.50.103
-    mac: 78:0F:77:B9:45:76
+    host: 192.168.1.154
+    mac: !secret broadlink_mac
     name: RM Pro
     
 
@@ -56,9 +56,13 @@ browser_mod:
 
 yeelight:
   devices:
-    192.168.50.192:
-      name: Light Strip
+    192.168.1.95:
+      name: Yeelight Light Strip
       model: strip1
+      #ssdp_fallback: True
+      #miio_token: "" # if provided miio protocol is used (optional)
+
+
 
 homekit:
   filter:
@@ -72,6 +76,18 @@ homekit:
       
 frontend:
   themes: !include_dir_merge_named themes
+  
+  
+sonoff:
+  username: !secret sonoff_username
+  password: !secret sonoff_password
+  devices:
+    1001042e0a:
+      device_class: light
+      name: 客廳燈
+    100104bbdc:
+      device_class: light
+      name: 飯廳燈
   
 
 

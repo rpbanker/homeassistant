@@ -1,0 +1,230 @@
+- id: '1605949656345'
+  alias: 睡房燈開關
+  description: ''
+  trigger:
+  - platform: device
+    device_id: bb86a80922b9161db436ef509296814e
+    domain: homekit_controller
+    type: button1
+    subtype: single_press
+  condition: []
+  action:
+  - type: toggle
+    device_id: 89ac30b8a6e3201b77530f3074feabaf
+    entity_id: switch.wall_switch_f3e7
+    domain: switch
+  mode: single
+- id: '1605949896417'
+  alias: 電視控制
+  description: ''
+  trigger:
+  - platform: device
+    device_id: e710f88b24417245f64647f453ce3b8f
+    domain: homekit_controller
+    type: button1
+    subtype: single_press
+  condition: []
+  action:
+  - service: switch.toggle
+    data: {}
+    entity_id: switch.dian_shi
+  mode: single
+- id: '1605951016435'
+  alias: Toilet Light Automation - Turn On
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: 969876ec2f730bf8954998fd40bbcc93
+    entity_id: binary_sensor.motion_sensor_5424
+    domain: binary_sensor
+  condition:
+  - condition: device
+    type: is_off
+    device_id: f6babc470d8974165e2502166a646fa5
+    entity_id: switch.wall_switch_5935
+    domain: switch
+  action:
+  - type: turn_on
+    device_id: f6babc470d8974165e2502166a646fa5
+    entity_id: switch.wall_switch_5935
+    domain: switch
+  mode: single
+- id: '1605951088857'
+  alias: Toilet Light Automation - Turn Off
+  description: ''
+  trigger:
+  - type: motion
+    platform: device
+    device_id: 969876ec2f730bf8954998fd40bbcc93
+    entity_id: binary_sensor.motion_sensor_5424
+    domain: binary_sensor
+  condition:
+  - condition: device
+    type: is_on
+    device_id: f6babc470d8974165e2502166a646fa5
+    entity_id: switch.wall_switch_5935
+    domain: switch
+  action:
+  - type: turn_off
+    device_id: f6babc470d8974165e2502166a646fa5
+    entity_id: switch.wall_switch_5935
+    domain: switch
+  mode: single
+- id: '1606206123333'
+  alias: 客廳燈 控制 Button 1
+  description: ''
+  trigger:
+  - platform: device
+    device_id: 0f6931327b233f2ea01f02a9885d81f9
+    domain: homekit_controller
+    type: button1
+    subtype: single_press
+  condition: []
+  action:
+  - service: light.toggle
+    data: {}
+    target:
+      entity_id: light.sonoff_1001042e0a
+  mode: single
+- id: '1606206159526'
+  alias: 客廳燈 控制 Button 2
+  description: ''
+  trigger:
+  - platform: device
+    device_id: 0f6931327b233f2ea01f02a9885d81f9
+    domain: homekit_controller
+    type: button2
+    subtype: single_press
+  condition: []
+  action:
+  - service: light.toggle
+    data: {}
+    target:
+      entity_id: light.sonoff_100104bbdc
+  mode: single
+- id: '1606206567867'
+  alias: 大門 人體感應器 開燈
+  description: 大門 人體感應器 開燈
+  trigger:
+  - type: motion
+    platform: device
+    device_id: 7f51d5809c744479455b205bdc37c61d
+    entity_id: binary_sensor.motion_sensor_5424
+    domain: binary_sensor
+  condition:
+  - condition: time
+    after: '18:00:00'
+    before: '23:30:00'
+  action:
+  - service: light.turn_on
+    data: {}
+  mode: single
+- id: '1606207229480'
+  alias: 米家無線開關 睡房燈
+  description: ''
+  trigger:
+  - platform: device
+    device_id: bca0f39dd1e266c94f7cb6b3da798d4e
+    domain: homekit_controller
+    type: button1
+    subtype: single_press
+  condition: []
+  action:
+  - type: toggle
+    device_id: 557f9e5e21c468aabd18fa021d936713
+    entity_id: switch.wall_switch_f3e7
+    domain: switch
+  mode: single
+- id: '1606207430630'
+  alias: 米家無線開關 電視
+  description: ''
+  trigger:
+  - platform: device
+    device_id: fa3238056334be7648f112ea537098ef
+    domain: homekit_controller
+    type: button1
+    subtype: single_press
+  condition: []
+  action:
+  - service: switch.toggle
+    data: {}
+    entity_id: switch.dian_shi
+  mode: single
+- id: '1606794583724'
+  alias: Aqara 6 button Single Press Button 1
+  description: ''
+  trigger:
+  - platform: device
+    device_id: 4c6dab5683cf4af7bfd0d0209771d272
+    domain: homekit_controller
+    type: button1
+    subtype: single_press
+  condition: []
+  action:
+  - service: light.toggle
+    data: {}
+    target:
+      entity_id: light.sonoff_1001042e0a
+  mode: single
+- id: '1606794616445'
+  alias: Aqara 6 button Single Press Button 2
+  description: ''
+  trigger:
+  - platform: device
+    device_id: 4c6dab5683cf4af7bfd0d0209771d272
+    domain: homekit_controller
+    type: button2
+    subtype: single_press
+  condition: []
+  action:
+  - service: light.toggle
+    data: {}
+    target:
+      entity_id: light.sonoff_100104bbdc
+  mode: single
+- id: '1606794753014'
+  alias: Aqara 6 button Single Press Button 3
+  description: ''
+  trigger:
+  - platform: device
+    device_id: 4c6dab5683cf4af7bfd0d0209771d272
+    domain: homekit_controller
+    type: button3
+    subtype: single_press
+  condition: []
+  action:
+  - service: switch.toggle
+    data: {}
+    entity_id: switch.dian_shi
+  mode: single
+- id: '1606794790258'
+  alias: Aqara 6 button Single Press Button 5
+  description: ''
+  trigger:
+  - platform: device
+    device_id: 4c6dab5683cf4af7bfd0d0209771d272
+    domain: homekit_controller
+    type: button5
+    subtype: single_press
+  condition: []
+  action:
+  - service: switch.toggle
+    data: {}
+    entity_id: switch.volume_up
+  mode: single
+- id: '1606794824955'
+  alias: Aqara 6 button Single Press Button 6
+  description: ''
+  trigger:
+  - platform: device
+    device_id: 4c6dab5683cf4af7bfd0d0209771d272
+    domain: homekit_controller
+    type: button6
+    subtype: single_press
+  condition: []
+  action:
+  - service: switch.toggle
+    data: {}
+    entity_id: switch.volume_down
+  mode: single

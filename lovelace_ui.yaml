@@ -1,0 +1,477 @@
+kiosk_mode:
+  user_settings:
+    - users:
+        - Tablet User
+      kiosk: true
+title: Home
+background: >-
+  center / cover no-repeat fixed
+  url('/hacsfiles/themes/material-design-hd-wallpaper.jpg')
+views:
+  - title: HOME1
+    path: home1
+    icon: 'mdi:home-outline'
+    panel: true
+    badges: []
+    cards:
+      - type: 'custom:homekit-card'
+        titleColor: '#FFFFFF'
+        useBrightness: false
+        statePositionTop: true
+        enableColumns: true
+        style: |
+          :host {
+            --tile-background: rgba(255, 255, 255, 0.8);
+            --tile-border-radius: 18px;
+            --tile-width: 100px;
+            --tile-height: 100px;
+            --tile-on-background: rgba(255, 255, 255, 1);
+            --tile-name-text-color: rgba(0, 0, 0, 0.4);
+            --tile-on-name-text-color: rgba(0, 0, 0, 1);
+            --tile-state-text-color: rgba(0, 0, 0, 0.4);
+            --tile-on-state-text-color: rgba(0, 0, 0, 1);
+            --tile-state-changed-text-color: rgb(134, 134, 134);
+            --tile-unavailable-state-text-color: rgba(255, 0, 0, 1);
+            --tile-value-text-color: rgba(0, 0, 0, 1);
+            --tile-icon-color: rgba(0, 0, 0, 0.3);
+            --tile-on-icon-color: #F7CD47;
+            --tile-width-mobile: 90px;
+            --tile-height-mobile: 90px;
+            --min-header-height: 150px;
+            --tile-icon-size: 30px;
+            --tile-image-radius: 100%
+            --slider-width: 120px;
+            --slider-height: 120px;
+          }
+          .button {
+            box-shadow: none !important;
+            font-weight: 400 !important;
+          }
+          .button.no-padding {
+            width: 126px !important;
+            height: 126px !important;          
+          }
+          .button.no-padding.size-2.height-2 {
+            height: calc( (var(--tile-width, 100px) * 2) + (10px * 4) + (10px * 1) - 1px) !important;
+            width: calc((var(--tile-width, 100px) * 2) + (10px * 4) + (10px * 1) - 1px) !important;
+          }
+          .button.event{
+            padding: 13px !important;
+          }
+          .button-inner .icon {
+            position: relative;
+            left: -8px;
+          }
+          .circle-state path {
+            stroke-width: 5;
+            stroke: rgba(171, 171, 171, 0.9);
+          }
+          #count {
+            font-size: 25px;
+          }
+          homekit-button[data-type="'custom'"] .name.on{
+            margin-bottom: 15px;
+          }
+          homekit-button[data-type="'custom'"].height-half .name.on{
+            margin-bottom: 0px;
+          }
+          @media only screen and (max-width: 768px) {
+            .header, .homekit-card {
+              width: 373px !important;
+            }
+          }
+          .row {
+            padding-top: 0px !important
+          }
+          @media only screen and (min-width: 769px) {
+            .row .col.fixed {
+              min-width: calc(var(--tile-on-row) * calc(var(--tile-width, 100px) + 35px)) !important;
+              width: calc(var(--tile-on-row) * calc(var(--tile-width, 100px) + 35px)) !important;
+            }       
+          }
+        rows:
+          - row: 1
+            columns:
+              - column: 1
+                tileOnRow: 2
+                entities:
+                  - title: 客廳 燈具
+                    entities:
+                      - entity: switch.switch_1615c0
+                        name: 客廳燈
+                        icon: 'mdi:dome-light'
+                      - entity: switch.switch_161661
+                        name: 飯廳燈
+                        icon: 'mdi:dome-light'
+                      - entity: switch.wall_switch_3187
+                        name: 走廊燈
+                        icon: 'mdi:globe-light'
+                      - entity: light.yeelight_strip
+                        name: Yeelight 檯燈
+                        icon: 'mdi:led-strip-variant'
+              - column: 3
+                tileOnRow: 2
+                entities:
+                  - title: 客廳 其他裝置
+                    entities:
+                      - entity: light.aqara_hub_b4ba
+                        icon: 'mdi:alarm-light-outline'
+                      - entity: alarm_control_panel.aqara_hub_b4ba
+                      - entity: fan.xiaomiairpurifier2s
+                        name: 小米空氣淨化器2S
+                        icon: 'mdi:fan'
+                      - entity: binary_sensor.motion_sensor_b24f
+                        name: 大門 人體感應器
+                        icon: 'mdi:motion-sensor'
+              - column: 2
+                tileOnRow: 2
+                entities:
+                  - title: 電視
+                    entities:
+                      - entity: switch.dian_shi
+                        icon: 'mdi:television'
+                      - custom: tv_volume_+
+                        name: Volume +
+                        icon: 'mdi:volume-plus'
+                        style: |
+                          .name {
+                            padding: 100px;
+                          }
+                        tap_action:
+                          action: call-service
+                          service: switch.toggle
+                          service_data:
+                            entity_id: switch.volume_up
+                      - custom: tv_volume_mute
+                        name: Volume Mute
+                        icon: 'mdi:volume-mute'
+                        style: |
+                          .name {
+                            padding: 100px;
+                          }
+                        tap_action:
+                          action: call-service
+                          service: switch.toggle
+                          service_data:
+                            entity_id: switch.volume_mute
+                      - custom: tv_volume_minus
+                        name: Volume -
+                        icon: 'mdi:volume-minus'
+                        style: |
+                          .name {
+                            padding: 100px;
+                          }
+                        tap_action:
+                          action: call-service
+                          service: switch.toggle
+                          service_data:
+                            entity_id: switch.volume_down
+          - row: 2
+            columns:
+              - column: 2
+                tileOnRow: 2
+                entities:
+                  - title: 睡房
+                    entities:
+                      - entity: switch.wall_switch_f3e7
+                        name: 睡房燈
+                        icon: 'mdi:dome-light'
+                      - entity: fan.xiaomi_air_purifier
+                        name: 小米空氣淨化器
+                        icon: 'mdi:fan'
+                      - card: 'custom:mini-graph-card'
+                        noPadding: true
+                        cardOptions:
+                          entities:
+                            - entity: >-
+                                sensor.temperature_and_humidity_sensor_dfa5_temperature
+                              name: 睡房溫度
+                          icon: 'mdi:thermometer'
+                          name: 睡房溫度
+                          tap_action: none
+                        cardStyle: >
+                          :host { height: 100%; padding: 0px; } .flex { display:
+                          -webkit-flex; } .flex.type-custom-mini-graph-card {
+                          padding: 0px; } .header { margin-top: 8px; padding:
+                          10px 13px 0px; } .header .name > span { opacity: 1;
+                          font-size: 13px; } .states { margin-top: 5px; padding:
+                          0px 13px; } .state > span { line-height: 20px; }
+                          .states .state .state__value { font-size: 20px; }
+                          .states .state .state__uom { font-size: 15px; }
+                          .states .state .state__time { font-size: 12px;
+                          font-weight: 400; bottom: -1.3rem; } .graph__labels {
+                          top: -20px !important; flex-direction: row !important;
+                          } .icon { color: #F7CD47 !important;} .graph__legend {
+                          padding: 0 5px 35px !important }
+                      - card: 'custom:mini-graph-card'
+                        noPadding: true
+                        cardOptions:
+                          entities:
+                            - entity: >-
+                                sensor.temperature_and_humidity_sensor_dfa5_humidity
+                              name: 睡房濕度
+                              color: '#70E4F9'
+                          icon: 'mdi:water-percent'
+                          name: 睡房濕度
+                          tap_action: none
+                        cardStyle: >
+                          :host { height: 100%; padding: 0px; } .flex { display:
+                          -webkit-flex; } .flex.type-custom-mini-graph-card {
+                          padding: 0px; } .header { margin-top: 8px; padding:
+                          10px 13px 0px; } .header .name > span { opacity: 1;
+                          font-size: 13px; } .states { margin-top: 5px; padding:
+                          0px 13px; } .state > span { line-height: 20px; }
+                          .states .state .state__value { font-size: 20px; }
+                          .states .state .state__uom { font-size: 15px; }
+                          .states .state .state__time { font-size: 12px;
+                          font-weight: 400; bottom: -1.3rem; } .graph__labels {
+                          top: -20px !important; flex-direction: row !important;
+                          } .icon { color: #F7CD47 !important;} .graph__legend {
+                          padding: 0 5px 35px !important } ha-icon { color:
+                          #70E4F9 }
+              - column: 2
+                tileOnRow: 2
+                entities:
+                  - title: 廁所
+                    entities:
+                      - entity: switch.wall_switch_5935
+                        name: 廁所燈
+                        icon: 'mdi:lightbulb'
+                      - entity: switch.wall_switch_5935_2
+                        name: 抽氣扇
+                        icon: 'mdi:fan'
+                      - entity: binary_sensor.motion_sensor_5424
+                        name: 廁所 人體感應器
+              - column: 3
+                tileOnRow: 2
+                entities:
+                  - title: 其他
+                    entities:
+                      - custom: Navigate Home
+                        name: 轉至舊UI
+                        icon: 'mdi:home'
+                        halfheight: true
+                        style: |
+                          .name {
+                            padding: 100px;
+                          }
+                        tap_action:
+                          action: navigate
+                          navigation_path: /lovelace/default_view
+                      - custom: Open All Light
+                        name: 開/關 客廳燈
+                        icon: 'mdi:lightbulb'
+                        halfheight: true
+                        style: |
+                          .name {
+                            padding: 100px;
+                          }
+                        tap_action:
+                          action: call-service
+                          service: switch.toggle
+                          service_data:
+                            entity_id: 'switch.switch_161661, switch.switch_1615c0'
+                      - entity: media_player.apple_tv_4k
+                        wider: true
+          - row: 3
+            columns:
+              - column: 1
+                tileOnRow: 2
+                entities:
+                  - title: 屋企溫度
+                    entities:
+                      - card: 'custom:mini-graph-card'
+                        noPadding: true
+                        wider: true
+                        higher: true
+                        cardOptions:
+                          entities:
+                            - entity: sensor.living_room_temp
+                              name: 客廳
+                              color: '#70E4F9'
+                            - entity: >-
+                                sensor.temperature_and_humidity_sensor_dfa5_temperature
+                              name: 睡房
+                              color: '#00ff00'
+                          icon: 'mdi:thermometer'
+                          name: 屋企溫度
+                          tap_action: none
+                        cardStyle: >
+                          :host { height: 100%; padding: 0px; } .flex { display:
+                          -webkit-flex; } .flex.type-custom-mini-graph-card {
+                          padding: 0px; } .header { margin-top: 8px; padding:
+                          10px 13px 0px; } .header .name > span { opacity: 1;
+                          font-size: 13px; } .states { margin-top: 5px; padding:
+                          0px 13px; } .state > span { line-height: 20px; }
+                          .states .state .state__value { font-size: 20px; }
+                          .states .state .state__uom { font-size: 15px; }
+                          .states .state .state__time { font-size: 12px;
+                          font-weight: 400; bottom: -1.3rem; } .graph__labels {
+                          top: -20px !important; flex-direction: row !important;
+                          } .icon { color: #F7CD47 !important;} .graph__legend {
+                          padding: 0 5px 35px !important } 
+              - column: 2
+                tileOnRow: 2
+                entities:
+                  - title: 屋企濕度
+                    entities:
+                      - card: 'custom:mini-graph-card'
+                        noPadding: true
+                        wider: true
+                        higher: true
+                        cardOptions:
+                          entities:
+                            - entity: sensor.living_room_humidity
+                              name: 客廳
+                              color: '#70E4F9'
+                            - entity: >-
+                                sensor.temperature_and_humidity_sensor_dfa5_humidity
+                              name: 睡房
+                              color: '#00ff00'
+                          icon: 'mdi:water-percent'
+                          name: 屋企濕度
+                          tap_action: none
+                        cardStyle: >
+                          :host { height: 100%; padding: 0px; } .flex { display:
+                          -webkit-flex; } .flex.type-custom-mini-graph-card {
+                          padding: 0px; } .header { margin-top: 8px; padding:
+                          10px 13px 0px; } .header .name > span { opacity: 1;
+                          font-size: 13px; } .states { margin-top: 5px; padding:
+                          0px 13px; } .state > span { line-height: 20px; }
+                          .states .state .state__value { font-size: 20px; }
+                          .states .state .state__uom { font-size: 15px; }
+                          .states .state .state__time { font-size: 12px;
+                          font-weight: 400; bottom: -1.3rem; } .graph__labels {
+                          top: -20px !important; flex-direction: row !important;
+                          } .icon { color: #F7CD47 !important;} .graph__legend {
+                          padding: 0 5px 35px !important } 
+              - column: 3
+                tileOnRow: 2
+                entities:
+                  - title: 屋企空氣質素
+                    entities:
+                      - card: 'custom:mini-graph-card'
+                        noPadding: true
+                        wider: true
+                        higher: true
+                        cardOptions:
+                          entities:
+                            - entity: sensor.living_room_aqi
+                              name: 客廳
+                              color: '#70E4F9'
+                            - entity: sensor.bedroom_aqi
+                              name: 睡房
+                              color: '#00ff00'
+                          icon: 'mdi:weather-windy'
+                          name: 屋企空氣質素
+                          tap_action: none
+                        cardStyle: >
+                          :host { height: 100%; padding: 0px; } .flex { display:
+                          -webkit-flex; } .flex.type-custom-mini-graph-card {
+                          padding: 0px; } .header { margin-top: 8px; padding:
+                          10px 13px 0px; } .header .name > span { opacity: 1;
+                          font-size: 13px; } .states { margin-top: 5px; padding:
+                          0px 13px; } .state > span { line-height: 20px; }
+                          .states .state .state__value { font-size: 20px; }
+                          .states .state .state__uom { font-size: 15px; }
+                          .states .state .state__time { font-size: 12px;
+                          font-weight: 400; bottom: -1.3rem; } .graph__labels {
+                          top: -20px !important; flex-direction: row !important;
+                          } .icon { color: #F7CD47 !important;} .graph__legend {
+                          padding: 0 5px 35px !important } 
+  - path: default_view
+    title: Home
+    badges:
+      - entity: alarm_control_panel.aqara_hub_b4ba
+      - entity: sensor.living_room_aqi
+      - entity: person.terrence_au
+      - entity: person.vincent_au
+      - entity: person.fion_kwong
+      - entity: person.alex_au
+      - entity: sensor.living_room_temp
+      - entity: sun.sun
+    cards:
+      - type: entities
+        entities:
+          - sensor.temperature_and_humidity_sensor_dfa5_temperature
+          - sensor.temperature_and_humidity_sensor_dfa5_humidity
+          - switch.wall_switch_f3e7
+        title: Bedroom
+      - type: entities
+        entities:
+          - entity: light.yeelight_strip4_0x000000000768e28c
+          - entity: switch.switch_1615c0
+          - entity: switch.switch_161661
+          - entity: light.aqara_hub_b4ba
+          - entity: switch.wall_switch_3187
+          - entity: binary_sensor.motion_sensor_b24f
+        title: Living Room
+      - type: alarm-panel
+        entity: alarm_control_panel.aqara_hub_b4ba
+      - type: entities
+        entities:
+          - sensor.brother_mfc_j650dw_bk
+          - sensor.brother_mfc_j650dw_c
+          - sensor.brother_mfc_j650dw_m
+          - sensor.brother_mfc_j650dw_y
+          - sensor.brother_mfc_j650dw
+        title: Printer
+      - type: entities
+        entities:
+          - sensor.gt_ac2900_4ec0_b_sent
+          - sensor.gt_ac2900_4ec0_packets_received
+          - sensor.gt_ac2900_4ec0_packets_sent
+          - sensor.gt_ac2900_4ec0_kib_s_received
+          - sensor.gt_ac2900_4ec0_kib_s_sent
+          - sensor.gt_ac2900_4ec0_packets_s_received
+          - sensor.gt_ac2900_4ec0_packets_s_sent
+          - sensor.gt_ac2900_4ec0_b_received
+        title: Router
+      - type: entities
+        entities:
+          - switch.wall_switch_5935
+          - switch.wall_switch_5935_2
+          - binary_sensor.motion_sensor_5424
+        title: Toilet
+      - type: entities
+        entities:
+          - fan.xiaomi_air_purifier
+          - fan.xiaomiairpurifier2s
+        title: 空氣清新機
+      - type: entities
+        entities:
+          - switch.volume_down
+          - switch.volume_mute
+          - switch.volume_up
+          - switch.dian_shi
+          - switch.dian_shi_back
+          - switch.dian_shi_down
+          - switch.dian_shi_enter
+          - switch.dian_shi_left
+          - switch.dian_shi_right
+          - switch.dian_shi_source
+          - switch.dian_shi_up
+        title: 電視控制
+      - type: weather-forecast
+        entity: weather.home
+        show_forecast: false
+      - type: 'custom:weather-card'
+        entity: weather.home
+        current: true
+        details: false
+        forecast: true
+        hourly_forecast: false
+        number_of_forecasts: 5
+      - type: sensor
+        entity: sensor.living_room_temp
+        graph: line
+        name: 客廳溫度
+      - type: media-control
+        entity: media_player.apple_tv_4k
+      - type: button
+        name: 轉至新UI
+        icon: 'mdi:home'
+        tap_action:
+          action: navigate
+          navigation_path: /lovelace/HOME
+        icon_height: 30px
